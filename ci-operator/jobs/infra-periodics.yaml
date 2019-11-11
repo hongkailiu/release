@@ -355,6 +355,25 @@ periodics:
 - agent: kubernetes
   labels:
     ci.openshift.io/role: infra
+  cron: ""
+  cluster: ci/api-build01-ci-devcluster-openshift-com:6443
+  decorate: true
+  interval: 3m
+  name: periodic-ci-image-importer-build01
+  spec:
+    containers:
+    - command: ["/bin/sh","-c"]
+      args: ["oc import-image -n ci ci-operator --all && oc import-image -n ci ci-ns-ttl-controller --all"]
+      image: registry.svc.ci.openshift.org/ci/applyconfig:latest
+      imagePullPolicy: Always
+      name: "image-importer"
+      resources:
+          requests:
+            cpu: 500m
+    serviceAccountName: "ci-image-importer"
+- agent: kubernetes
+  labels:
+    ci.openshift.io/role: infra
   extra_refs:
   - base_ref: master
     org: openshift
