@@ -1,6 +1,5 @@
 # common
 
-This folder includes the resources shared by all clusters (including api.ci) in CI-infrastructure.
+This folder includes the resources shared by all clusters in CI-infrastructure.
 
-Note that we are still in process of deprecating api.ci, a 3.11 cluster.
-Adding OCP-4-only CRDs into this folder will not be accepted until the process is done.
+We stopped applying this folder to `api.ci` because no jobs are running there and it is going to be offline soon.
